@@ -1,0 +1,15 @@
+# Protection de l'accès administrateur
+RewriteEngine On
+
+
+# Si pas de session, rediriger vers login
+RewriteCond %{REQUEST_URI} ^/cdi/version3_reservation_a_completer/admin/
+RewriteCond %{HTTP_COOKIE} !PHPSESSID [NC]
+RewriteRule .* /cdi/version3_reservation_a_completer/login.php [R,L]
+
+
+# Autoriser l'accès aux fichiers PHP
+<FilesMatch "\.php$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
